@@ -1,7 +1,7 @@
 <script lang="ts">
     import {Chart, type ChartOptions, type ScaleChartOptions} from 'chart.js/auto'
     import {onMount} from "svelte";
-    import type {GraphPage} from "../GraphData.ts";
+    import { type Graph, ProjectInfo } from "../TypesAndData.ts";
     import { tick } from 'svelte';
     import {scales} from "chart.js";
 
@@ -13,7 +13,7 @@
         "sources"
     ]
 
-    let currentPage = $state(currentPageStates[1])
+    let currentPage = $state(currentPageStates[0])
 
     const data = [
         { year: 2010, count: 10 },
@@ -34,57 +34,43 @@
         { year: 2016, count: 28222 },
     ];
 
-	// Inspiration: https://stackoverflow.com/questions/75807813/how-to-set-y-axis-value-in-vertical-bar-chart-using-chart-js
-	const leFigaroChart1 = {
-		labels: ["17th October", "24 October", "31th October", "Mairie Limoges", "Curfew"],
-        datasets: [
-	        {
-				label: "Anti-Protest",
-                data: [
-					66,
-                    68,
-                    50,
-                    62,
-                    71
-                ]
-            },
-	        {
-		        label: "Pro-Protest",
-		        data: [
-			        4,
-			        31,
-			        33,
-			        31,
-			        28
-		        ]
-	        }
-        ]
-    }
 
 
-    let testCanvas: HTMLCanvasElement
+    let graphCanvas: HTMLCanvasElement
 
 
-    let graphs: GraphPage[] = [
-        {
-            data: {
-                graph_type: 'bar',
-                data_labels: data.map(row => row.year),
-                data: data.map(row => row.count),
-                datasets_label: 'test by year'
-            },
-            description: "This is a description",
-            title: "Graph 1"
-        },
-        {
-            data: {
-                graph_type: 'bar',
-                data_labels: data2.map(row => row.year),
-                data: data2.map(row => row.count),
-                datasets_label: 'lknmasdlkadsklnasd'
-            },
-            description: "another description",
-            title: "Graph 2"
+    // Inspiration: https://stackoverflow.com/questions/75807813/how-to-set-y-axis-value-in-vertical-bar-chart-using-chart-js
+    let graphs: Graph[] = [
+	    {
+			title: "Share of anti-protest and pro-protest comments on Instagram",
+            subtitle: "Le Figaro",
+            description: "Here we see that Instagram has a tendency to create echo chambers : anti-protest comments almost always make up over 60% of the total share, pointing to an online bubble where everybody agrees with each other and little opposition is shown (never more than 33% of the total share).",
+            graphType: "bar",
+			dataset: {
+				labels: ["17th October", "24 October", "31th October", "Mairie Limoges", "Curfew"],
+				datasets: [
+					{
+						label: "Anti-Protest",
+						data: [
+							66,
+							68,
+							50,
+							62,
+							71
+						]
+					},
+					{
+						label: "Pro-Protest",
+						data: [
+							4,
+							31,
+							33,
+							31,
+							28
+						]
+					}
+				]
+            }
         }
     ]
 
@@ -121,13 +107,15 @@
 
     function updateGraph() {
         chart?.destroy();
+		console.log(currentGraph)
         chart = new Chart(
-            testCanvas,
+            graphCanvas,
             {
 
-                type: currentGraph.data.graph_type,
+                type: currentGraph.graphType,
                 data: {
-					...leFigaroChart1
+					labels: currentGraph.dataset.labels,
+                    datasets: currentGraph.dataset.datasets
                 },
                 options: {
                     plugins: {
@@ -136,14 +124,23 @@
                             text: currentGraph.title,
                             padding: {
                                 top: 10,
-                                bottom: 30
+                                // bottom: 10
                             },
                             font: {
                                 size: 50
                             }
                         },
-                        legend: {
-
+                        subtitle: {
+	                        display: true,
+	                        text: currentGraph.subtitle,
+	                        padding: {
+		                        // top: 10,
+		                        bottom: 30
+	                        },
+	                        font: {
+		                        size: 30,
+                                style: 'italic'
+	                        }
                         }
                     },
 
@@ -162,10 +159,13 @@
         <div id="start-inner-div">
             <div class="centred-div">
                 <h1>
-                    Title of Project
+                    {ProjectInfo.project_name}
                 </h1>
+                <h3>
+                    {ProjectInfo.people}
+                </h3>
                 <p>
-                    Blah, blasds, ieqsda, kasdkasmdsak, and John
+                    {ProjectInfo.made_by_humans_text}
                 </p>
             </div>
             <button onclick={graphsInit}>
@@ -183,7 +183,7 @@
         <div id="left-side">
             {#if currentPage == "graphs"}
             <div id="canvas-div">
-                <canvas id="canvas" bind:this={testCanvas}>
+                <canvas id="canvas" bind:this={graphCanvas}>
                 </canvas>
             </div>
 
@@ -196,19 +196,22 @@
         <div id="right-side">
             <div id="top-right">
                 <h1>
-                    Project Name
+                    {ProjectInfo.project_name}
                 </h1>
                 <p>
-                    Blah, blasds, ieqsda, kasdkasmdsak, and John
+                    {ProjectInfo.people}
                 </p>
                 <span>
-                    Made by humans :)
+                    {ProjectInfo.made_by_humans_text}
                 </span>
             </div>
 
             <div id="middle-right">
                 {#if currentPage == "graphs"}
-                    {currentGraph.description}
+                    <p id="project-graph-description">
+                        {currentGraph.description}
+                    </p>
+
                 {:else if currentPage == "sources"}
                     Sources Description
                 {/if}
@@ -271,7 +274,6 @@
 
     }
     #right-side {
-
         //width: 100%;
         //height: 100%;
 		margin: 10px;
@@ -284,11 +286,17 @@
 		  overflow-y: scroll;
 		  padding: 40px;
 	  }
-      #top-right {
+        #top-right {
           height: 100px;
-      }
+        }
 
-      #bottom-right {
+        #middle-right {
+            p {
+                font-size: 30px;
+            }
+        }
+
+        #bottom-right {
           padding: 10px;
           #next-button {
               width: 100%;

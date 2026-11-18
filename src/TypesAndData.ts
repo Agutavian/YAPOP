@@ -1,11 +1,11 @@
-import type {ChartType, ChartTypeRegistry} from "chart.js";
-
-type GraphData = {
-    graph_type: ChartType
-    data_labels: number[]
-    datasets_label: string
+import { type ChartType } from "chart.js";
+type DataSet = {
+    label: string,
     data: number[]
-
+}
+type TypesAndData = {
+    labels: string[]
+    datasets: DataSet[]
 }
 
 //         new Chart(
@@ -23,8 +23,16 @@ type GraphData = {
 //                 }
 //             }
 //         );
-export type GraphPage = {
-    data: GraphData
+export type Graph = {
+    dataset: TypesAndData
     description: string
     title: string
+    subtitle: string | undefined
+    graphType: ChartType
+}
+
+export const ProjectInfo = {
+    project_name: "Project Name",
+    people: "Beatrice, Fiona, Paul, Tïa, Marco",
+    made_by_humans_text: "Made by humans :)"
 }
