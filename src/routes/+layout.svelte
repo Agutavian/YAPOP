@@ -18,12 +18,16 @@
 
 <style lang="scss">
 
+
+
 	:global(body) {
 		//background: #833AB4;
 		background-image: url("background.png");
 		background-repeat: no-repeat;
 		background-size: cover;
 		margin: 0;
+		font-family: Tahoma, Geneva, sans-serif;
+		font-weight: 400;
 	}
 
 	:global(#background) {
