@@ -188,7 +188,7 @@
                                 // bottom: 10
                             },
                             font: {
-                                size: 50
+                                size: Math.max(16, window.innerWidth / 50)
                             }
                         },
                         subtitle: {
@@ -199,7 +199,7 @@
 		                        bottom: 30
 	                        },
 	                        font: {
-		                        size: 40,
+		                        size: Math.max(16, window.innerWidth / 60),
                                 style: 'oblique'
 	                        }
                         },
@@ -208,16 +208,10 @@
 								useBorderRadius: true,
 								borderRadius: 4,
 								font: {
-									size: 30,
+									size: Math.max(16, window.innerWidth / 70),
 									style: 'italic'
 								}
                             },
-							title: {
-								font: {
-									size: 30,
-									style: 'italic'
-								}
-                            }
 	                    }
                     },
 
@@ -335,25 +329,25 @@
 		box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         backdrop-filter: blur(100%);
 		#canvas-div {
-
+			position: relative;
             height: 100%;
-            canvas {
-				min-width: 0
-            }
+			canvas {
+				position: absolute;
+				inset: 0;
+			}
         }
 
     }
     #right-side {
+
 		margin: 10px;
         display: grid;
-        grid-template-rows: auto minmax(0, 1fr) auto;
+		grid-template-rows: auto minmax(0, 1fr) auto;
+		min-height: 0;
 		box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         border-radius: 10px;
-		#middle-right {
-		  overflow-x: hidden;
-		  overflow-y: scroll;
-		  padding: 40px;
-	  }
+
+
         #top-right {
             height: 100px;
             width: 100%;
@@ -366,11 +360,14 @@
             }
         }
 
-        #middle-right {
-            p {
-                font-size: 30px;
-            }
-        }
+		#middle-right {
+			overflow-x: hidden;
+			overflow-y: scroll;
+			padding: 40px;
+			p {
+				font-size: 30px;
+			}
+		}
 
         #bottom-right {
           padding: 10px;

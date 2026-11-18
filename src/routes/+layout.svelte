@@ -21,7 +21,7 @@
 
 
 	:global(body) {
-		background-image: url("background.png");
+		background-image: url("/background.png");
 		background-repeat: no-repeat;
 		background-size: cover;
 		margin: 0;
