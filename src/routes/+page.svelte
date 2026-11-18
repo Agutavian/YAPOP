@@ -323,26 +323,19 @@
 	.graph-section-main {
 		width: 100vw;
 		height: 100vh;
-		/*background-color: red;*/
 		display: grid;
 		grid-template-columns: 3fr 1fr;
 	}
 
     #left-side {
-        //display: flex;
-        //align-items: center;
-        //justify-content: center;
-        //width: 95%;
-        //height: 100%;
+
         margin: 10px;
         border-radius: 10px;
-        //background-color: red;
-        //background-color: red;
-        //border-right: 10px solid red;
+
 		box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         backdrop-filter: blur(100%);
 		#canvas-div {
-            //padding: 20px;
+
             height: 100%;
             canvas {
 				min-width: 0
@@ -351,8 +344,6 @@
 
     }
     #right-side {
-        //width: 100%;
-        //height: 100%;
 		margin: 10px;
         display: grid;
         grid-template-rows: auto minmax(0, 1fr) auto;
@@ -385,7 +376,6 @@
           padding: 10px;
           #next-button {
               width: 100%;
-              //height: 100%;
               height: 100px;
         }
       }
