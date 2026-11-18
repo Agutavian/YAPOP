@@ -71,7 +71,68 @@
 					}
 				]
             }
-        }
+        },
+	    {
+		    title: "TESTING TO SEE 5 BARS",
+		    subtitle: "All News",
+		    description: "Just a test!",
+		    graphType: "bar",
+		    dataset: {
+			    labels: ["17th October", "24 October", "31th October", "Mairie Limoges", "Curfew"],
+			    datasets: [
+				    {
+					    label: "Le Monde",
+					    data: [
+						    66,
+						    68,
+						    50,
+						    62,
+						    32
+					    ]
+				    },
+				    {
+					    label: "Le Figaro",
+					    data: [
+						    42,
+						    31,
+						    33,
+						    12,
+						    28
+					    ]
+				    },
+				    {
+					    label: "BBC",
+					    data: [
+						    35,
+						    31,
+						    45,
+						    31,
+						    28
+					    ]
+				    },
+				    {
+					    label: "Associated Press",
+					    data: [
+						    40,
+						    21,
+						    33,
+						    34,
+						    20
+					    ]
+				    },
+				    {
+					    label: "Pro-Protest",
+					    data: [
+						    4,
+						    31,
+						    29,
+						    25,
+						    28
+					    ]
+				    }
+			    ]
+		    }
+	    }
     ]
 
     let currentGraphIndex = $state(0)
@@ -138,10 +199,26 @@
 		                        bottom: 30
 	                        },
 	                        font: {
-		                        size: 30,
-                                style: 'italic'
+		                        size: 40,
+                                style: 'oblique'
 	                        }
-                        }
+                        },
+	                    legend: {
+							labels: {
+								useBorderRadius: true,
+								borderRadius: 4,
+								font: {
+									size: 30,
+									style: 'italic'
+								}
+                            },
+							title: {
+								font: {
+									size: 30,
+									style: 'italic'
+								}
+                            }
+	                    }
                     },
 
                     ...chartStyle
@@ -287,7 +364,15 @@
 		  padding: 40px;
 	  }
         #top-right {
-          height: 100px;
+            height: 100px;
+            width: 100%;
+            h1, p {
+                text-align: center;
+                margin: 0;
+            }
+            h1 {
+                margin-bottom: 10px;
+            }
         }
 
         #middle-right {
@@ -300,7 +385,8 @@
           padding: 10px;
           #next-button {
               width: 100%;
-              height: 100%;
+              //height: 100%;
+              height: 100px;
         }
       }
     }
