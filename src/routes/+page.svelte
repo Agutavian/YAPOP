@@ -4,6 +4,7 @@
     import { type Graph, ProjectInfo } from "../TypesAndData.ts";
     import { tick } from 'svelte';
     import { Graphs } from '../TypesAndData.ts';
+    import { fade, fly } from 'svelte/transition';
     import {scales} from "chart.js";
 
 
@@ -159,8 +160,10 @@
         <div id="start-inner-div">
             <div class="centred-div">
                 <h1>
-                    {ProjectInfo.project_name}
+                    {ProjectInfo.long_name}
+
                 </h1>
+                <h2>({ProjectInfo.project_name})</h2>
                 <h3>
                     {ProjectInfo.people}
                 </h3>
@@ -178,7 +181,7 @@
     </div>
 {:else}
 
-    <div class="graph-section-main section">
+    <div class="graph-section-main section" transition:fly={{ y: 1020, duration: 700 }}>
 
         <div id="left-side" class="section">
             {#if currentPage == "graphs"}
@@ -201,9 +204,9 @@
                 <p>
                     {ProjectInfo.people}
                 </p>
-                <span>
+                <p class="made-by-humans">
                     {ProjectInfo.made_by_humans_text}
-                </span>
+                </p>
             </div>
 
             <div id="middle-right">
@@ -212,8 +215,8 @@
                         {currentGraph.description}
                     </p>
 
-                {:else if currentPage == "sources"}
-                    Sources Description
+                <!--{:else if currentPage == "sources"}-->
+                <!--    -->
                 {/if}
             </div>
             <div id="bottom-right">
@@ -262,9 +265,6 @@
     .section {
 		box-shadow: 0 0 20px rgba(28, 36, 44, 0.2);
     }
-    //button:hover {
-    //    scale: 2;
-    //}
 
     #start-outer-div{
         width: 100vw;
@@ -277,6 +277,24 @@
             width: 200px;
             height: 50px;
         }
+
+        .centred-div {
+			h1 {
+				font-size: xxx-large;
+				//font-family: sans-serif, "Helvetica Neue", "Lucida Grande", Arial;
+				//font-stretch: expanded;
+                //transform: scaleY(2);
+				//font-size: 16pt;
+				//font-family: Arial, sans-serif;
+                margin-bottom: 0;
+			}
+            h2 {
+                //font-style: italic;
+                font-weight: 500;
+                margin: 0;
+            }
+        }
+
     }
 
 
@@ -311,20 +329,30 @@
         display: grid;
 		grid-template-rows: auto minmax(0, 1fr) auto;
 		min-height: 0;
-		box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+		//box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        box-shadow: none;
         border-radius: 10px;
 
 
         #top-right {
-            height: 100px;
+            //height: 100px;
+
             width: 100%;
-            h1, p {
+			box-shadow: 1px 2px 16.2px rgba(16, 18, 24, 0.37);
+            border-radius: 10px;
+            h1, p, span {
                 text-align: center;
                 margin: 0;
             }
-            h1 {
+			h1 {
+                margin-top: 10px;
+            }
+			.made-by-humans {
+                font-size: 10px;
+                font-style: italic;
                 margin-bottom: 10px;
             }
+
         }
 
 		#middle-right {

@@ -40,7 +40,7 @@ export const ProjectInfo = {
     project_name: "YAPOP",
     long_name: "Yet Another Project on Online Polarisation",
     people: "Beatrice, Fiona, Paul, Tïa, Marco",
-    made_by_humans_text: "Made by humans :)"
+    made_by_humans_text: "Made by and for humans :)"
 }
 
 // const aggregateComments = [
@@ -133,7 +133,7 @@ export const Graphs: Graph[] = [
         description: "Pro-Protest % of Comments by Social Media Platform",
         graphType: "bar",
         x_axis: "Social Media Platform",
-        y_axis: "What % of Comments are Pro-Protest",
+        y_axis: "% of Pro-Protest Comments",
         dataset: {
             labels: ["Instagram", "YouTube", "Twitter (X)", "Average"],
             datasets: [

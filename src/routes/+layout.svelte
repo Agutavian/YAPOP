@@ -1,13 +1,14 @@
 <script lang="ts">
 	import favicon from '#lib/assets/favicon.svg';
 	import type { LayoutProps } from './$types';
+	import { ProjectInfo } from "../TypesAndData.ts";
 
 	let { children }: LayoutProps = $props();
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>yapop</title>
+	<title>{ProjectInfo.project_name}</title>
 </svelte:head>
 
 
@@ -20,7 +21,7 @@
 <style lang="scss">
 
 	:global(body) {
-		background-image: url("/background.png");
+		background-image: url("/background.webp");
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-attachment: fixed;
