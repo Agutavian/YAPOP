@@ -209,21 +209,19 @@
                         </h1>
                         <p>
                             https://yapop.flagmaster.me
-
                         </p>
                     </div>
                 </div>
                 <div class="project-card">
                     <div>
-                        <img src="/yapop.flagmaster.me.png" class="qr-image" alt="yapop.flagmaster.me qr code"/>
+                        <img src="/agutavian.yapop.png" class="qr-image" alt="yapop.flagmaster.me qr code"/>
                     </div>
                     <div class="project-card-description">
                         <h1>
-                            TODO WEBSITE SOURCE CODE
+                            Website Source Code
                         </h1>
                         <p>
-                            https://yapop.flagmaster.me
-
+                            https://github.com/Agutavian/YAPOP
                         </p>
                     </div>
                 </div>
@@ -233,13 +231,14 @@
                     </div>
                     <div class="project-card-description">
                         <h1>
-                            YAWSE Github Link
+                            YAWSE Source Code
                         </h1>
                         <p>
                             https://github.com/Agutavian/YAWSE
                         </p>
                     </div>
                 </div>
+
             {/if}
         </div>
 
