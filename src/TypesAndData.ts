@@ -224,28 +224,7 @@ export const Graphs: Graph[] = [
             ]
         }
     },
-    {
-        title: "Number of Comments vs. Pro/Anti-Protest Comment %",
-        subtitle: "All News Outlets, social media sites",
-        description: "Anti-Protest % of Comments by Social Media Platform",
-        graphType: "scatter",
-        x_axis: "Social Media Platform",
-        y_axis: "What % of Comments are Anti-Protest",
-        dataset: {
-            labels: ["Comment #", "Pro/Anti-Protest Comment %"],
-            datasets: [
-                {
-                    label: "Comments vs. Other Metric",
-                    data: [
-                        { x: 2381, y: 22, label: 'October 17' },
-                        { x: 1032, y: 34, label: 'October 24' },
-                        { x: 578, y: 39, label: 'October 31' },
-                    ],
-                },
 
-            ]
-        }
-    },
 
 
 
@@ -253,7 +232,28 @@ export const Graphs: Graph[] = [
 ]
 
 
-
+// {
+//     title: "Number of Comments vs. Pro/Anti-Protest Comment %",
+//         subtitle: "All News Outlets, social media sites",
+//     description: "Anti-Protest % of Comments by Social Media Platform",
+//     graphType: "scatter",
+//     x_axis: "Social Media Platform",
+//     y_axis: "What % of Comments are Anti-Protest",
+//     dataset: {
+//     labels: ["Comment #", "Pro/Anti-Protest Comment %"],
+//         datasets: [
+//         {
+//             label: "Comments vs. Other Metric",
+//             data: [
+//                 { x: 2381, y: 22, label: 'October 17' },
+//                 { x: 1032, y: 34, label: 'October 24' },
+//                 { x: 578, y: 39, label: 'October 31' },
+//             ],
+//         },
+//
+//     ]
+// }
+// },
 
 //     title: "Pro-Protesters On Instagram as a % of Comments",
 //     subtitle: "All News Outlets",
