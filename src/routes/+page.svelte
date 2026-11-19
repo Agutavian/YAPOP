@@ -273,15 +273,15 @@
                     </div>
                 {#if currentPage == "graphs"}
                     <div id="project-graph-description">
-<!--                        <p>-->
-<!--                            {currentGraph.description}-->
-<!--                        </p>-->
+                        <p>
+                            {currentGraph.description}
+                        </p>
                     </div>
 
                 {:else if currentPage == "sources"}
-                    <p id="projects-middle-text">
-                        Links to Projects
-                    </p>
+<!--                    <p id="projects-middle-text">-->
+<!--                        Links to Projects-->
+<!--                    </p>-->
 
                 {/if}
             </div>
@@ -457,7 +457,7 @@
 				overflow-x: hidden;
 				overflow-y: scroll;
 				p {
-					//font-size: 30px;
+					font-size: x-large;
 					margin: 0;
 				}
             }

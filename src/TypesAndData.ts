@@ -58,7 +58,7 @@ export const Graphs: Graph[] = [
         title: "Aggregate Comments per Common Events",
         short_title: "Aggregate Comments",
         subtitle: "All News Outlets",
-        description: "Total comments event that the news outlets had in common",
+        description: "-> BBC dominates the other news organisations in terms of comments. Le Monde however, also follows suit in the categories where it is present.",
         graphType: "bar",
         x_axis: "Events",
         y_axis: "Number of Comments",
@@ -104,11 +104,10 @@ export const Graphs: Graph[] = [
         title: "Pro/Anti-Protesters % Aggregated by Event",
         short_title: "Aggregate Pro/Anti %",
         subtitle: "All News Outlets, social media sites",
-        description: "Total comments event that the news outlets had in common",
-
+        description: "-> While not equal, pro/anti protester % of the total comments are relatively close to one-another in each date.",
         graphType: "bar",
         x_axis: "Events",
-        y_axis: "Number of Comments",
+        y_axis: "% of Comments",
         dataset: {
             labels: ["17th October", "24 October", "31st October"],
             datasets: [
@@ -135,12 +134,12 @@ export const Graphs: Graph[] = [
         title: "Pro-Protest % of Comments by Social Media Platform",
         short_title: "Pro% by Platform",
         subtitle: "All News Outlets, social media sites",
-        description: "Pro-Protest % of Comments by Social Media Platform",
+        description: "-> Le Monde comments were the most constant in their support for protests, while for AP it varied a lot between platforms. This tendency in Le Monde comment section may be due to partisan affiliation of Le Monde.",
         graphType: "bar",
         x_axis: "Social Media Platform",
         y_axis: "% of Pro-Protest Comments",
         dataset: {
-            labels: ["Instagram", "YouTube", "Twitter (X)", "Average"],
+            labels: ["Instagram", "YouTube", "Twitter (X)", "Average Across"],
             datasets: [
                 {
                     label: "Le Monde",
@@ -185,12 +184,12 @@ export const Graphs: Graph[] = [
         title: "Anti-Protest % of Comments by Social Media Platform",
         short_title: "Anti% by Platform",
         subtitle: "All News Outlets, social media sites",
-        description: "Anti-Protest % of Comments by Social Media Platform",
+        description: "-> Le Figaro consistently had the most anti-protest comments, which may be due to its partisan affiliation.",
         graphType: "bar",
         x_axis: "Social Media Platform",
         y_axis: "What % of Comments are Anti-Protest",
         dataset: {
-            labels: ["Instagram", "YouTube", "Twitter (X)", "Average"],
+            labels: ["Instagram", "YouTube", "Twitter (X)", "Average Across"],
             datasets: [
                 {
                     label: "Le Monde",
@@ -235,12 +234,12 @@ export const Graphs: Graph[] = [
         title: "% of Polarisation per Social Media Platform",
         short_title: "Average(Pro, Anti) / Total Comments",
         subtitle: "(Average of Pro + Average of Anti) / Total Comments",
-        description: "Average of Pro + Average of Anti / Total Comments",
+        description: "-> Insignificant difference in level of polarisation between social media platform.",
         graphType: "bar",
         x_axis: "Social Media Platform",
         y_axis: "% of Polarising Comments",
         dataset: {
-            labels: ["Instagram", "YouTube", "Twitter (X)", "Average"],
+            labels: ["Instagram", "YouTube", "Twitter (X)", "Average Across"],
             datasets: [
                 {
                     label: "Polarisation ",
