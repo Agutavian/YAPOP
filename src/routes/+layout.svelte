@@ -18,20 +18,21 @@
 
 <style lang="scss">
 
-
-
 	:global(body) {
 		background-image: url("/background.png");
 		background-repeat: no-repeat;
 		background-size: cover;
+		background-attachment: fixed;
 		margin: 0;
 		font-family: Tahoma, Geneva, sans-serif;
 		font-weight: 400;
+
 	}
 
 	:global(#background) {
-		background-color: rgb(255 255 255 / 0.6);
+		background-color: rgb(255 255 255 / 0.5);
 		backdrop-filter: blur(100px);
+
 	}
 
 </style>

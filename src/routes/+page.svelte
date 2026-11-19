@@ -3,6 +3,7 @@
     import {onMount} from "svelte";
     import { type Graph, ProjectInfo } from "../TypesAndData.ts";
     import { tick } from 'svelte';
+    import { Graphs } from '../TypesAndData.ts';
     import {scales} from "chart.js";
 
 
@@ -15,140 +16,14 @@
 
     let currentPage = $state(currentPageStates[0])
 
-    const data = [
-        { year: 2010, count: 10 },
-        { year: 2011, count: 20 },
-        { year: 2012, count: 15 },
-        { year: 2013, count: 25 },
-        { year: 2014, count: 22 },
-        { year: 2015, count: 30 },
-        { year: 2016, count: 28 },
-    ];
-    const data2 = [
-        { year: 2010, count: 213123 },
-        { year: 2011, count: 2312312 },
-        { year: 2012, count: 13215 },
-        { year: 2013, count: 22225 },
-        { year: 2014, count: 221222 },
-        { year: 2015, count: 3222210 },
-        { year: 2016, count: 28222 },
-    ];
-
-
 
     let graphCanvas: HTMLCanvasElement
 
-
-    // Inspiration: https://stackoverflow.com/questions/75807813/how-to-set-y-axis-value-in-vertical-bar-chart-using-chart-js
-    let graphs: Graph[] = [
-	    {
-			title: "Share of anti-protest and pro-protest comments on Instagram",
-            subtitle: "Le Figaro",
-            description: "Here we see that Instagram has a tendency to create echo chambers : anti-protest comments almost always make up over 60% of the total share, pointing to an online bubble where everybody agrees with each other and little opposition is shown (never more than 33% of the total share).",
-            graphType: "bar",
-			dataset: {
-				labels: ["17th October", "24 October", "31th October", "Mairie Limoges", "Curfew"],
-				datasets: [
-					{
-						label: "Anti-Protest",
-						data: [
-							66,
-							68,
-							50,
-							62,
-							71
-						]
-					},
-					{
-						label: "Pro-Protest",
-						data: [
-							4,
-							31,
-							33,
-							31,
-							28
-						]
-					}
-				]
-            }
-        },
-	    {
-		    title: "TESTING TO SEE 5 BARS",
-		    subtitle: "All News",
-		    description: "Just a test!",
-		    graphType: "bar",
-		    dataset: {
-			    labels: ["17th October", "24 October", "31th October", "Mairie Limoges", "Curfew"],
-			    datasets: [
-				    {
-					    label: "Le Monde",
-					    data: [
-						    66,
-						    68,
-						    50,
-						    62,
-						    32
-					    ]
-				    },
-				    {
-					    label: "Le Figaro",
-					    data: [
-						    42,
-						    31,
-						    33,
-						    12,
-						    28
-					    ]
-				    },
-				    {
-					    label: "BBC",
-					    data: [
-						    35,
-						    31,
-						    45,
-						    31,
-						    28
-					    ]
-				    },
-				    {
-					    label: "Associated Press",
-					    data: [
-						    40,
-						    21,
-						    33,
-						    34,
-						    20
-					    ]
-				    },
-				    {
-					    label: "Pro-Protest",
-					    data: [
-						    4,
-						    31,
-						    29,
-						    25,
-						    28
-					    ]
-				    }
-			    ]
-		    }
-	    }
-    ]
-
     let currentGraphIndex = $state(0)
-    let currentGraph = $derived(graphs[currentGraphIndex])
+    let currentGraph = $derived(Graphs[currentGraphIndex])
     // let nextGraphButtonActive = $derived(graphs.length -1 == currentGraphIndex)
 
     let chart: Chart | undefined;
-
-    let chartStyle: ChartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            x: { ticks: { color: 'black' } },
-            y: { ticks: { color: 'black' }}
-        }
-    }
 
     async function graphsInit() {
         currentPage = "graphs"
@@ -158,17 +33,40 @@
 
     function nextGraph() {
         // const g = $state.snapshot(currentGraph);
-        if (graphs.length == currentGraphIndex + 1) {
-            currentPage = "sources"
-            return
+        if (Graphs.length == currentGraphIndex + 1) {
+	        chart?.destroy()
+	        chart = undefined
+	        currentPage = "sources"
+	        return
         }
         currentGraphIndex++
         updateGraph()
     }
+    async function backAGraph() {
+	    // const g = $state.snapshot(currentGraph);
+	    if (currentPage == "sources"){
+		    // currentGraphIndex--
+		    console.log(currentGraphIndex)
+		    currentPage = "graphs"
+            await tick()
+		    updateGraph()
+		    return
+	    }
+
+	    if (currentGraphIndex == 0) {
+		    currentPage = "start"
+		    return
+	    }
+
+	    currentGraphIndex--
+
+
+	    updateGraph()
+    }
 
     function updateGraph() {
         chart?.destroy();
-		console.log(currentGraph)
+		// console.log(currentGraph)
         chart = new Chart(
             graphCanvas,
             {
@@ -214,9 +112,40 @@
                             },
 	                    }
                     },
+                    scales: {
+						x: {
+							ticks: { color: 'black' },
+							title: {
+								display: true,
+                                text: currentGraph.x_axis,
+                                color: 'black',
+                                font: {
+	                                size: Math.max(16, window.innerWidth / 80),
+                                }
+                            }
+                        },
+	                    y: {
+		                    ticks: { color: 'black' },
+		                    title: {
+			                    display: true,
+			                    text: currentGraph.y_axis,
+			                    color: 'black',
+			                    font: {
+				                    size: Math.max(16, window.innerWidth / 80),
+			                    }
+		                    }
+	                    }
+                    },
 
-                    ...chartStyle
-                }
+	                responsive: true,
+	                maintainAspectRatio: false,
+	                elements: {
+		                bar: {
+			                borderRadius: 5,
+			                borderWidth: 3,
+		                }
+	                }
+				}
             }
         );
     }
@@ -249,9 +178,9 @@
     </div>
 {:else}
 
-    <div class="graph-section-main">
+    <div class="graph-section-main section">
 
-        <div id="left-side">
+        <div id="left-side" class="section">
             {#if currentPage == "graphs"}
             <div id="canvas-div">
                 <canvas id="canvas" bind:this={graphCanvas}>
@@ -264,7 +193,7 @@
         </div>
 
 
-        <div id="right-side">
+        <div id="right-side" class="section">
             <div id="top-right">
                 <h1>
                     {ProjectInfo.project_name}
@@ -288,11 +217,19 @@
                 {/if}
             </div>
             <div id="bottom-right">
-                <button onclick={nextGraph} id="next-button" hidden={currentPage === "sources"}>
-                <span>
-                    Next Page
-                </span>
+                {#if currentGraphIndex > 0 || currentPage === "sources"}
+                    <button onclick={() => backAGraph()} class="next-button">
+                        <span>
+                            Previous
+                        </span>
+                    </button>
+                {/if}
+                <button onclick={nextGraph} class="next-button" hidden={currentPage === "sources"}>
+                    <span>
+                        Next
+                    </span>
                 </button>
+
             </div>
         </div>
     </div>
@@ -304,6 +241,31 @@
 
 <style lang="scss">
 
+    button {
+		//backdrop-filter: blur(1px);
+        background-color: transparent;
+        border: none;
+        //https://box-shadow.art/shadow/6850/
+		box-shadow: 0 0 20px rgba(28, 36, 44, 0.2);
+        border-radius: 10px;
+        &:hover {
+			transition: scale 0.2s ease;
+            cursor: pointer;
+            scale: 1.05;
+        }
+        span {
+            font-size: 30px;
+            //font-size: 100%;
+        }
+    }
+
+    .section {
+		box-shadow: 0 0 20px rgba(28, 36, 44, 0.2);
+    }
+    //button:hover {
+    //    scale: 2;
+    //}
+
     #start-outer-div{
         width: 100vw;
 		height: 100vh;
@@ -311,6 +273,10 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+        button {
+            width: 200px;
+            height: 50px;
+        }
     }
 
 
@@ -326,8 +292,9 @@
         margin: 10px;
         border-radius: 10px;
 
-		box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+		//box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         backdrop-filter: blur(100%);
+        padding: 10px;
 		#canvas-div {
 			position: relative;
             height: 100%;
@@ -363,18 +330,22 @@
 		#middle-right {
 			overflow-x: hidden;
 			overflow-y: scroll;
-			padding: 40px;
+			padding: 10px;
 			p {
-				font-size: 30px;
+				//font-size: 30px;
+                margin: 0;
 			}
 		}
 
         #bottom-right {
-          padding: 10px;
-          #next-button {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            padding: 10px;
+            .next-button {
               width: 100%;
               height: 100px;
-        }
+            }
       }
     }
 

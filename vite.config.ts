@@ -1,6 +1,7 @@
 import adapter from '@sveltejs/adapter-cloudflare';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 export default defineConfig({
 	plugins: [
@@ -10,7 +11,8 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			adapter: adapter()
+			adapter: adapter(),
+			preprocess: [vitePreprocess({ script: true })]
 		})
 	]
 
