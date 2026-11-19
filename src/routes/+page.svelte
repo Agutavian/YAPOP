@@ -66,10 +66,9 @@
     }
 
     async function goToGraph(index: number) {
+		currentPage = "graphs"
+        await tick()
 		currentGraphIndex = index
-
-
-
 	    updateGraph()
     }
 
