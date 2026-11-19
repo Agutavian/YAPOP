@@ -60,7 +60,7 @@ export const Graphs: Graph[] = [
         x_axis: "Events",
         y_axis: "Number of Comments",
         dataset: {
-            labels: ["17th October", "24 October", "31th October"],
+            labels: ["17th October", "24 October", "31st October"],
             datasets: [
                 {
                     label: "Le Monde",
@@ -105,7 +105,7 @@ export const Graphs: Graph[] = [
         x_axis: "Events",
         y_axis: "Number of Comments",
         dataset: {
-            labels: ["17th October", "24 October", "31th October"],
+            labels: ["17th October", "24 October", "31st October"],
             datasets: [
                 {
                     label: "Pro-Protesters",
