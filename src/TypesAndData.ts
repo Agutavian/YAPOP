@@ -231,6 +231,29 @@ export const Graphs: Graph[] = [
             ]
         }
     },
+    {
+        title: "% of Polarisation per Social Media Platform",
+        short_title: "Average(Pro, Anti) / Total Comments",
+        subtitle: "(Average of Pro + Average of Anti) / Total Comments",
+        description: "Average of Pro + Average of Anti / Total Comments",
+        graphType: "bar",
+        x_axis: "Social Media Platform",
+        y_axis: "% of Polarising Comments",
+        dataset: {
+            labels: ["Instagram", "YouTube", "Twitter (X)", "Average"],
+            datasets: [
+                {
+                    label: "Polarisation ",
+                    data: [
+                        48,
+                        59,
+                        52,
+                        52
+                    ]
+                },
+            ]
+        }
+    },
 
 
 
