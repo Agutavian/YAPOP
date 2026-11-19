@@ -30,6 +30,7 @@ export type Graph = {
     dataset: TypesAndData
     description: string
     title: string
+    short_title: string
     subtitle: string | undefined
     x_axis: string
     y_axis: string
@@ -55,6 +56,7 @@ export const ProjectInfo = {
 export const Graphs: Graph[] = [
     {
         title: "Aggregate Comments per Common Events",
+        short_title: "Aggregate Comments",
         subtitle: "All News Outlets",
         description: "Total comments event that the news outlets had in common",
         graphType: "bar",
@@ -100,8 +102,10 @@ export const Graphs: Graph[] = [
     },
     {
         title: "Pro/Anti-Protesters % Aggregated by Event",
+        short_title: "Aggregate Pro/Anti %",
         subtitle: "All News Outlets, social media sites",
         description: "Total comments event that the news outlets had in common",
+
         graphType: "bar",
         x_axis: "Events",
         y_axis: "Number of Comments",
@@ -129,6 +133,7 @@ export const Graphs: Graph[] = [
     },
     {
         title: "Pro-Protest % of Comments by Social Media Platform",
+        short_title: "Pro% by Platform",
         subtitle: "All News Outlets, social media sites",
         description: "Pro-Protest % of Comments by Social Media Platform",
         graphType: "bar",
@@ -178,6 +183,7 @@ export const Graphs: Graph[] = [
     },
     {
         title: "Anti-Protest % of Comments by Social Media Platform",
+        short_title: "Anti% by Platform",
         subtitle: "All News Outlets, social media sites",
         description: "Anti-Protest % of Comments by Social Media Platform",
         graphType: "bar",

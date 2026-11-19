@@ -32,9 +32,9 @@
         updateGraph()
     }
 
-    function nextGraph() {
+    function nextGraph(force_sources: boolean = false) {
         // const g = $state.snapshot(currentGraph);
-        if (Graphs.length == currentGraphIndex + 1) {
+        if (Graphs.length == currentGraphIndex + 1 || force_sources == true) {
 	        chart?.destroy()
 	        chart = undefined
 	        currentPage = "sources"
@@ -60,6 +60,14 @@
 	    }
 
 	    currentGraphIndex--
+
+
+	    updateGraph()
+    }
+
+    async function goToGraph(index: number) {
+		currentGraphIndex = index
+
 
 
 	    updateGraph()
@@ -191,7 +199,47 @@
             </div>
 
             {:else}
-                Sources
+                <div class="project-card">
+                    <div>
+                        <img src="/yapop.flagmaster.me.png" class="qr-image" alt="yapop.flagmaster.me qr code"/>
+                    </div>
+                    <div class="project-card-description">
+                        <h1>
+                            Website
+                        </h1>
+                        <p>
+                            https://yapop.flagmaster.me
+
+                        </p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div>
+                        <img src="/yapop.flagmaster.me.png" class="qr-image" alt="yapop.flagmaster.me qr code"/>
+                    </div>
+                    <div class="project-card-description">
+                        <h1>
+                            TODO WEBSITE SOURCE CODE
+                        </h1>
+                        <p>
+                            https://yapop.flagmaster.me
+
+                        </p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-card-image-container">
+                        <img src="/yawse-github.png" class="qr-image" alt="yapop.flagmaster.me qr code"/>
+                    </div>
+                    <div class="project-card-description">
+                        <h1>
+                            YAWSE Github Link
+                        </h1>
+                        <p>
+                            https://github.com/Agutavian/YAWSE
+                        </p>
+                    </div>
+                </div>
             {/if}
         </div>
 
@@ -210,13 +258,32 @@
             </div>
 
             <div id="middle-right">
+
+                    <div id="table-of-contents">
+                        <h3>
+                            Navigate to a Page:
+                        </h3>
+                        {#each Graphs as graph, index (graph)}
+                            <button class="table-of-contents-entry" onclick={() => goToGraph(index)}>
+                                {graph.short_title}
+                            </button>
+                        {/each}
+                        <button class="table-of-contents-entry project-table-entry" onclick={() => nextGraph(true)}>
+                            Projects
+                        </button>
+                    </div>
                 {#if currentPage == "graphs"}
-                    <p id="project-graph-description">
-                        {currentGraph.description}
+                    <div id="project-graph-description">
+<!--                        <p>-->
+<!--                            {currentGraph.description}-->
+<!--                        </p>-->
+                    </div>
+
+                {:else if currentPage == "sources"}
+                    <p id="projects-middle-text">
+                        Links to Projects
                     </p>
 
-                <!--{:else if currentPage == "sources"}-->
-                <!--    -->
                 {/if}
             </div>
             <div id="bottom-right">
@@ -227,7 +294,7 @@
                         </span>
                     </button>
                 {/if}
-                <button onclick={nextGraph} class="next-button" hidden={currentPage === "sources"}>
+                <button onclick={() => nextGraph()} class="next-button" hidden={currentPage === "sources"}>
                     <span>
                         Next
                     </span>
@@ -345,6 +412,7 @@
                 margin: 0;
             }
 			h1 {
+                font-size: xxx-large;
                 margin-top: 10px;
             }
 			.made-by-humans {
@@ -356,13 +424,48 @@
         }
 
 		#middle-right {
-			overflow-x: hidden;
-			overflow-y: scroll;
-			padding: 10px;
-			p {
-				//font-size: 30px;
-                margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+
+			//padding: 10px;
+			#table-of-contents {
+				width: 100%;
+				box-shadow: 1px 2px 16.2px rgba(16, 18, 24, 0.37);
+				border-radius: 10px;
+                //padding: 10px;
+                h3 {
+                    margin: 10px 0 10px 0;
+                    text-align: center;
+                }
+				.table-of-contents-entry {
+                    margin: 0 0 0 10px;
+					font-size: large;
+                    //text-wrap: nowrap;
+					width: 100%;
+					box-shadow: none;
+					text-align: start;
+					text-decoration: underline;
+                    overflow: inherit;
+				}
+                .project-table-entry {
+                    margin-bottom: 10px;
+                }
+
 			}
+            #project-graph-description {
+				overflow-x: hidden;
+				overflow-y: scroll;
+				p {
+					//font-size: 30px;
+					margin: 0;
+				}
+            }
+
+
+
+
 		}
 
         #bottom-right {
@@ -376,6 +479,43 @@
             }
       }
     }
+
+    .project-card {
+		box-shadow: 1px 1px 5.2px rgba(16, 18, 24, 0.37);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+        .project-card-image-container {
+			margin: 0;
+			padding: 0;
+        }
+		.qr-image {
+			height: 150px;
+			border-radius: 10px;
+            margin: 0;
+            padding: 0;
+		}
+        .project-card-description {
+            display: flex;
+            flex-direction: column;
+            h1 {
+                margin: 0;
+                font-size: xx-large;
+            }
+            p {
+                margin: 0;
+            }
+        }
+
+    }
+    #projects-middle-text {
+        align-items: center;
+    }
+
+
 
 
 </style>
