@@ -37,7 +37,8 @@ export type Graph = {
 }
 
 export const ProjectInfo = {
-    project_name: "yapop",
+    project_name: "YAPOP",
+    long_name: "Yet Another Project on Online Polarisation",
     people: "Beatrice, Fiona, Paul, Tïa, Marco",
     made_by_humans_text: "Made by humans :)"
 }
